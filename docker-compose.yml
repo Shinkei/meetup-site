@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+    ui:
+        container_name: dojo-ui
+        build: ./client
+        volumes:
+            - ./client:/home/node/app
+        ports:
+            - 80:3000
+    api:
+        container_name: dojo-api
+        build: ./server
+        environment:
+            - FLASK_APP=/home/python/app/dojo.py
+            - FLASK_ENV=development
+        volumes:
+            - ./server:/home/python/app
+        ports:
+            - 8080:8080

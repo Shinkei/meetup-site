@@ -3,6 +3,7 @@ FROM node:alpine
 USER node
 
 WORKDIR /tmp
+ENV PATH "/tmp/node_modules/.bin:$PATH"
 ADD package.json yarn.lock /tmp/
 RUN yarn
 

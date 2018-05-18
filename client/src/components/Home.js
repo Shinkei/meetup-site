@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
+import React, { Component } from 'react'
+import AppBar from 'material-ui/AppBar'
 
-class Home extends Component{
-
-  render(){
-	return (
-	  <div>Home Dojo
-	  
-	  
-	  <AppBar title="Dojo"/>
-	  
-	  </div>
-	);
+class Home extends Component {
+  render () {
+    return (
+      <article>
+        <AppBar showMenuIconButton={false} />
+      </article>
+    )
   }
 }
 
-export default Home;
+export default Home

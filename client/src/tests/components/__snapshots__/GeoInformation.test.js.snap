@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeoInformation Component should not regress 1`] = `
+<article>
+  <h3>
+    Ubicacion
+  </h3>
+  <h4>
+    Dirección
+  </h4>
+  <p />
+  <div
+    style={
+      Object {
+        "height": "450px",
+        "width": "100%",
+      }
+    }
+  />
+</article>
+`;

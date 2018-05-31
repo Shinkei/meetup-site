@@ -8,7 +8,7 @@ class App extends Component {
   render () {
     return (
       <MuiThemeProvider>
-        <Home />
+        <Home title="Coding Dojo" description="coding dojo description"/>
       </MuiThemeProvider>
     )
   }

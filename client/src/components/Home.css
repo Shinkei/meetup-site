@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+}
+
+.title {
+  grid-column: 1 / -1;
+}
+
+.description {
+  grid-column: 1;
+}

@@ -11,7 +11,11 @@ class Home extends Component {
         <div className="container">
           <h1 className="title">{this.props.title}</h1>
           <p className="description">{this.props.description}</p>
-          <GeoInformation direccion="Calle falsa 123"/>
+          <GeoInformation 
+            direccion="Calle falsa 123"
+            latitude={6.2647816}
+            longitud={-75.5705099}
+            zoom={16}/>
         </div>
       </article>
     )

@@ -1,14 +1,6 @@
 import React, {Component} from 'react'
 import loadGoogleMapsAPI from 'load-google-maps-api'
 
-const OPTIONS = {
-  center: {
-    lat: 6.2647816,
-    lng: -75.5705099
-  },
-  zoom: 16
-}
-
 const API_CONFIG = {
   key: 'AIzaSyAuBEdfk-djsMYt8nSkNHUPplqrokZ4UPY',
   language: 'es'
@@ -21,8 +13,20 @@ const MAP_STYLES = {
 
 class GeoInformation extends Component {
   componentDidMount () {
+    
+    const center= {
+      lat:this.props.latitude,
+      lng:this.props.longitud
+    };
+
+    const options = {
+      center,
+      zoom: this.props.zoom    
+    }
+
     loadGoogleMapsAPI(API_CONFIG).then(googleMaps => {
-      new googleMaps.Map(this.refs.map, OPTIONS)
+      const map = new googleMaps.Map(this.refs.map, options)
+      new googleMaps.Marker({position:center, map})
     }).catch(err => {
       console.warning('Something went wrong loading the map', err)
     })

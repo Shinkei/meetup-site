@@ -6,8 +6,6 @@ services:
         build: ./client
         volumes:
             - ./client:/home/node/app
-        ports:
-            - 80:3000
     api:
         container_name: dojo-api
         build: ./server
@@ -16,5 +14,3 @@ services:
             - FLASK_ENV=development
         volumes:
             - ./server:/home/python/app
-        ports:
-            - 8080:8080

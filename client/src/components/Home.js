@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
 import GeoInformation from './GeoInformation'
 import './Home.css';
@@ -14,12 +15,17 @@ class Home extends Component {
           <GeoInformation 
             direccion="Calle falsa 123"
             latitude={6.2647816}
-            longitud={-75.5705099}
+            longitude={-75.5705099}
             zoom={16}/>
         </div>
       </article>
     )
   }
+}
+
+Home.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequires
 }
 
 export default Home

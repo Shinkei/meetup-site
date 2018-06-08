@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import loadGoogleMapsAPI from 'load-google-maps-api'
 
 const API_CONFIG = {
-  key: 'AIzaSyAuBEdfk-djsMYt8nSkNHUPplqrokZ4UPY',
+  key: process.env.REACT_APP_MAPS_KEY,
   language: 'es'
 }
 
@@ -16,7 +17,7 @@ class GeoInformation extends Component {
     
     const center= {
       lat:this.props.latitude,
-      lng:this.props.longitud
+      lng:this.props.longitude
     };
 
     const options = {
@@ -42,6 +43,12 @@ class GeoInformation extends Component {
       </article>
     )
   }
+}
+
+GeoInformation.propTypes = {
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number.isRequired
 }
 
 export default GeoInformation

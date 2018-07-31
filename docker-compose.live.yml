@@ -2,9 +2,17 @@ version: '3.6'
 
 services:
     ui:
+        env_file:
+            - ./client/.env.live
         volumes:
             - static:/home/node/app/build:rw
         command: yarn build
+    api:
+        env_file:
+            - ./server/.env.live
+    db:
+        volumes:
+            - ~/.pgdata/dojo-live:/var/lib/postgresql/data/pgdata
     proxy:
         container_name: dojo-server
         build: ./live

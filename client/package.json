@@ -2,19 +2,27 @@
   "name": "coding-dojo",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "modulePaths": ["src"]
+  },
+  "devDependencies": {
+    "redux-mock-store": "1.5.3"
+  },
   "dependencies": {
-    "material-ui": "^0.20.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
+    "material-ui": "0.20.0",
+    "react": "16.3.2",
+    "react-app-rewired": "1.5.2",
+    "react-dom": "16.3.2",
+    "react-redux": "5.0.7",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
-    "standard": "^11.0.1"
+    "redux": "4.0.0",
+    "redux-saga": "0.16.0",
+    "standard": "11.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject"
   }
 }

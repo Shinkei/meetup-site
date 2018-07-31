@@ -1,6 +1,4 @@
-FROM node:alpine
-
-USER node
+FROM node:9.11-alpine
 
 WORKDIR /tmp
 ENV PATH "/tmp/node_modules/.bin:$PATH"
@@ -10,6 +8,8 @@ RUN yarn
 WORKDIR /home/node/app
 
 EXPOSE 3000
+
+USER node
 
 ADD init.sh /
 ENTRYPOINT ["/init.sh"]

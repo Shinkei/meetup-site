@@ -2,8 +2,15 @@ version: '3.6'
 
 services:
     ui:
+        env_file:
+            - ./client/.env.dev
         ports:
             - 80:3000
     api:
+        env_file:
+            - ./server/.env.dev
         ports:
             - 8080:8080
+    db:
+        volumes:
+            - ~/.pgdata/dojo-dev:/var/lib/postgresql/data/pgdata

@@ -1,4 +1,9 @@
-FROM python:alpine
+FROM python:3.6-alpine
+
+RUN apk update && apk --no-cache add \
+    postgresql-dev=10.4-r0 \
+    gcc=6.4.0-r5 \
+    musl-dev=1.1.18-r3
 
 RUN addgroup -g 1000 python && adduser -u 1000 -G python -s /bin/sh -D python
 

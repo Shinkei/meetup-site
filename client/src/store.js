@@ -1,17 +1,31 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { all } from 'redux-saga/effects'
 
-const initialState = {
-  isLoading: false,
-  user: null,
-  error: null
+import {
+  reducer as loginReducer,
+  saga as loginSaga
+} from 'state-login'
+
+const reducer = combineReducers({
+  login: loginReducer
+})
+
+function * rootSaga () {
+  yield all([
+    loginSaga()
+  ])
 }
 
-const codingDojojReducer = (state = initialState, action) => {
-	switch(action.type){
-		case 
-		default:
-			return state;
-	}
-}
+// Use compose function from devtools browser plugin if available
+const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export default createStore(reducer)
+const sagaMiddleware = createSagaMiddleware()
+
+const initialState = {}
+
+export default createStore(reducer, initialState, enhancer(
+  applyMiddleware(sagaMiddleware)
+))
+
+sagaMiddleware.run(rootSaga)

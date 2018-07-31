@@ -1,0 +1,26 @@
+<!doctype html>
+<script>
+  // SET CONSTANTS
+  var TOKEN = '{{ token }}';
+  var DOMAIN = '{{ domain }}';
+
+  // LISTEN FOR MESSAGES COMING FROM PARENT WINDOW
+  var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+  var eventer = window[eventMethod];
+  var MESSAGE_EVENT = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
+  /*
+   * Process incomming messages. The method receives an object containing:
+   * data   object Object received
+   * origin string URI with protocol, hostname and port
+   * source object Reference to window object
+   */
+  function messageHandler(ev) {
+    debugger
+    if (ev.origin !== DOMAIN) return;
+    if (ev.data.type === 'close_window') window.close();
+  }
+  eventer(MESSAGE_EVENT, messageHandler, false);
+
+  // SEND CREDENTIALS TO PARENT WINDOW
+  window.opener.postMessage({type: 'auth_success', token: TOKEN}, DOMAIN);
+</script>

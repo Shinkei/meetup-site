@@ -19,3 +19,4 @@ class Config(object):
     WEB_UI_URL = os.environ.get("WEB_UI_URL")
     JWT_IDENTITY_CLAIM = "sub"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ENABLE_CORS = os.getenv("ENABLE_CORS", "0") == "1"

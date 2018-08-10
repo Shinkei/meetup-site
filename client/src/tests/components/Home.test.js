@@ -1,4 +1,4 @@
-import { store }  from 'tests/common.mock'
+import { store } from 'tests/common.mock'
 import 'tests/localStorage.mock'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'

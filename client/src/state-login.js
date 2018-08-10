@@ -9,7 +9,7 @@ import { call, take, put, takeEvery, all } from 'redux-saga/effects'
 
 const initialState = {
   isLoading: false,
-  isAuthenticated: !!window.localStorage.getItem('auth_token'),
+  isAuthenticated: false,
   error: null
 }
 
@@ -36,8 +36,11 @@ export const reducer = (state = initialState, action) => {
 }
 
 export const actions = {
-  attemptLogin() {
+  attemptLogin () {
     return {type: LOGIN_ATTEMPT}
+  },
+  restoreLogin () {
+    return {type: LOGIN_SUCCESS}
   }
 }
 
@@ -56,15 +59,15 @@ const loginEvents = () => {
      * origin string URI with protocol, hostname and port
      * source object Reference to window object
      */
-    function messageHandler(ev) {
-        if (ev.origin !== DOMAIN) return
-        if (ev.data.type === 'auth_success') {
-          removeListener()
-          ev.source.postMessage({type: 'close_window'}, DOMAIN)
-          window.localStorage.setItem('auth_token', ev.data.token)
-          emitter({type: LOGIN_SUCCESS})
-          emitter(END)
-        }
+    function messageHandler (ev) {
+      if (ev.origin !== DOMAIN) return
+      if (ev.data.type === 'auth_success') {
+        removeListener()
+        ev.source.postMessage({type: 'close_window'}, DOMAIN)
+        window.localStorage.setItem('auth_token', ev.data.token)
+        emitter({type: LOGIN_SUCCESS})
+        emitter(END)
+      }
     }
     addListener(MESSAGE_EVENT, messageHandler, false)
     setTimeout(() => {
@@ -76,7 +79,7 @@ const loginEvents = () => {
   })
 }
 
-function* loginHandler() {
+function * loginHandler () {
   const channel = yield call(loginEvents)
   try {
     while (true) {
@@ -88,7 +91,7 @@ function* loginHandler() {
   }
 }
 
-export function* saga() {
+export function * saga () {
   yield all([
     takeEvery(LOGIN_ATTEMPT, loginHandler)
   ])

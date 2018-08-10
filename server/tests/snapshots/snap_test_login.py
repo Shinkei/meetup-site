@@ -8,6 +8,7 @@ from snapshottest import Snapshot
 snapshots = Snapshot()
 
 snapshots["TestLogin.test__login_url__returns_oauth_redirection 1"] = {
+    "Access-Control-Allow-Origin": "*",
     "Content-Length": "589",
     "Content-Type": "text/html; charset=utf-8",
     "Location": "https://github.com/login/oauth/authorize?response_type=code&client_id=55c03bf7535a58408b2c&redirect_uri=http%3A%2F%2Ftest.local%2Flogin%2Fauthorized&scope=read%3Auser%2Cread%3Aorg",

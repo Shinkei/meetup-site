@@ -4,7 +4,7 @@ import re
 from sqlalchemy import create_engine
 
 from dojo import create_app
-from dojo.models import db
+from dojo.models import db, User
 from dojo.settings import Config
 
 
@@ -50,3 +50,11 @@ def session(request):
         session.remove()
 
     request.addfinalizer(teardown)
+
+
+@pytest.fixture(scope="function")
+def user():
+    u = User(name="Foo Bar", avatar_url="...img")
+    db.session.add(u)
+    db.session.commit()
+    return u

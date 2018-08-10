@@ -11,7 +11,7 @@ class Home extends Component {
           title={process.env.TITLE}
           showMenuIconButton={false}
           iconElementRight={<LoginButton />}
-          />
+        />
       </article>
     )
   }

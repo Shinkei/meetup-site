@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 
@@ -14,7 +15,8 @@ import {
 
 const reducer = combineReducers({
   login: loginReducer,
-  user: userReducer
+  user: userReducer,
+  form: formReducer
 })
 
 function * rootSaga () {

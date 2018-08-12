@@ -2,6 +2,7 @@ import AppBar from 'material-ui/AppBar'
 import React, { Component } from 'react'
 
 import LoginButton from 'components/LoginButton'
+import Event from './Event';
 
 class Home extends Component {
   render () {
@@ -12,6 +13,7 @@ class Home extends Component {
           showMenuIconButton={false}
           iconElementRight={<LoginButton />}
         />
+        <Event/>
       </article>
     )
   }

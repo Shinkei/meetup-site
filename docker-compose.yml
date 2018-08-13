@@ -11,7 +11,6 @@ services:
         build: ./server
         environment:
             - FLASK_APP=/home/python/app/dojo
-            - FLASK_ENV=development
         volumes:
             - ./server:/home/python/app
         depends_on:

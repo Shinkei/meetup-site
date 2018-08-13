@@ -1,9 +1,9 @@
 FROM python:3.6-alpine
 
 RUN apk update && apk --no-cache add \
-    postgresql-dev=10.4-r0 \
-    gcc=6.4.0-r8 \
-    musl-dev=1.1.19-r10
+    postgresql-dev=10.5-r0 \
+    gcc=6.4.0-r5 \
+    musl-dev=1.1.18-r3
 
 RUN addgroup -g 1000 python && adduser -u 1000 -G python -s /bin/sh -D python
 
@@ -18,5 +18,8 @@ WORKDIR /home/python/app
 
 ENV FLASK_RUN_PORT 8080
 EXPOSE 8080
+
+ADD init.sh /
+ADD wsgi.sh /
 
 CMD ["flask", "run", "--host=0.0.0.0"]

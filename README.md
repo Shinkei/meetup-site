@@ -1,5 +1,4 @@
 # MEETUP SITE
----
 
 This project is intended to be a self-hosted alternative to manage the
 events of our community. But everyone is invited to use it and extend it
@@ -7,17 +6,17 @@ as desired.
 
 ## Table of Contents
 
-- Features
-- Installation
-- Usage
-- Contributing
-- Credits
-- License
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 - Log in with github OAuth
 - Administrator privileges for members of the org
 - Written in python and javascript
+- ddclient included to update dynamic DNS
 - Easy to use
 
 ## Installation
@@ -86,3 +85,7 @@ You should also add tests for any new features and bug fixes.
 bin/compose dev exec api pytest # Run tests on our backend
 bin/compose dev exec ui yarn test # Run tests on our frontend
 ```
+
+## License
+
+Please see [LICENSE](LICENSE)

@@ -52,7 +52,14 @@ export const fetchUser = () => {
 export function * loginHandler () {
   yield put({type: FETCH_USER_ATTEMPT})
   try {
-    const {data: {data}} = yield call(fetchUser)
+    const res = yield call(fetchUser)
+    if (res.data.errors) {
+      for (let error of res.data.errors) {
+        yield put({type: FETCH_USER_ERROR, error})
+      }
+      return
+    }
+    const {data: {data}} = res
     yield put({type: FETCH_USER_SUCCESS, ...data})
   } catch (error) {
     yield put({type: FETCH_USER_ERROR, error})

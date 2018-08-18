@@ -3,18 +3,21 @@ import { Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 
-const EditableInput = (props) =>{
+const EditableInput = (props) => {
   return (
-    props.isEditionMode? <EditionMode {...props} /> : <ViewMode {...props} />
+    props.isEditionMode ? <EditionMode {...props} /> : <ViewMode {...props} />
   )
 }
 
 const EditionMode = (props) => {
+  const stiles = {
+    display: "block"
+  }
+
   return (
     <div>
-      <Field name={props.titleProp} component={renderTextField} type="text" floatingLabelText={props.titleLabel}/>
-      <br/>
-      <Field name={props.inputProp} component={renderTextField} multiLine={true} floatingLabelText={props.inputLabel}/>
+      <Field className='input-field' name={props.titleProp} component={renderTextField} type='text' hintText={props.titleHint} />
+      <Field className='input-field' name={props.inputProp} component={renderTextField} multiLine hintText={props.inputHint} />
     </div>
   )
 }
@@ -50,14 +53,13 @@ EditableInput.propTypes = {
 EditionMode.propTypes = {
   titleProp: PropTypes.string.isRequired,
   inputProp: PropTypes.string.isRequired,
-  titleLabel: PropTypes.string.isRequired,
-  inputLabel: PropTypes.string.isRequired
+  titleHint: PropTypes.string.isRequired,
+  inputHint: PropTypes.string.isRequired
 }
 
 ViewMode.propTypes = {
   titleContent: PropTypes.string.isRequired,
   inputContent: PropTypes.string.isRequired
 }
-
 
 export default EditableInput

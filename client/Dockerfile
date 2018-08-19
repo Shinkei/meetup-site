@@ -1,4 +1,4 @@
-FROM node:9.11-alpine
+FROM node:8.11-alpine
 
 WORKDIR /tmp
 ENV PATH "/tmp/node_modules/.bin:$PATH"

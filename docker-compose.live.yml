@@ -12,6 +12,9 @@ services:
             - ./server/.env.live
         entrypoint: /init.sh
         command: /wsgi.sh
+        depends_on:
+            - ui
+            - db
     db:
         volumes:
             - ~/.pgdata/dojo-live:/var/lib/postgresql/data/pgdata
@@ -23,6 +26,7 @@ services:
         volumes:
             - ./live/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
             - ./live/etc/nginx/api.conf:/etc/nginx/api.conf:ro
+            - ./live/tests:/home/nginx/tests:ro
             - static:/usr/share/nginx/html:ro
         depends_on:
             - ui

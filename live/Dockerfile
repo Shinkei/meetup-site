@@ -1,6 +1,8 @@
 FROM nginx:1.15-alpine
 
 RUN apk update && apk --no-cache add \
+    bats=0.4.0-r2 \
+    curl=7.61.0-r0 \
     make=4.2.1-r0 \
     wget=1.19.5-r0 \
     perl=5.26.2-r1 \
@@ -26,6 +28,8 @@ RUN touch /var/run/nginx.pid && \
     chmod 600 /etc/ddclient/ddclient.conf
 
 ADD etc/ddclient/conf.template /etc/ddclient/
+
+WORKDIR /home/nginx
 
 ADD init.sh /
 

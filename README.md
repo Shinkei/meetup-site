@@ -47,11 +47,11 @@ After starting the server you need to run the migrations for all the DB
 components to be created.
 
 ```sh
-bin/compose dev exec api flask db upgrade # Run migrations on
-development DB
+# Run migrations on development DB
+bin/compose dev exec api flask db upgrade
 
-bin/compose live exec api flask db upgrade # Run migrations on
-production DB
+# Run migrations on production DB
+bin/compose live exec api flask db upgrade
 ```
 
 ## Contributing
@@ -82,8 +82,14 @@ Before opening a pull request, please make sure the test suite passes.
 You should also add tests for any new features and bug fixes.
 
 ```sh
-bin/compose dev exec api pytest # Run tests on our backend
-bin/compose dev exec ui yarn test # Run tests on our frontend
+# Run tests on our backend
+bin/compose dev exec api pytest
+
+# Run tests on our frontend
+bin/compose dev exec ui yarn test
+
+# Run tests on our production stack
+bin/compose live exec proxy bats tests
 ```
 
 ## License

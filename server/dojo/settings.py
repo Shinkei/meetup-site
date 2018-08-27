@@ -3,6 +3,7 @@ import os
 
 class Config(object):
     SERVER_NAME = os.environ.get("SERVER_NAME")
+    PREFERRED_URL_SCHEME = os.environ.get("PREFERRED_URL_SCHEME", "http")
     SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
     GH_OAUTH_CONFIG = dict(

@@ -24,7 +24,8 @@ services:
         env_file:
             - ./live/.env
         volumes:
-            - ./live/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ~/.certdata/dojo-live:/etc/letsencrypt:rw
+            - ./live/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:rw
             - ./live/etc/nginx/api.conf:/etc/nginx/api.conf:ro
             - ./live/tests:/home/nginx/tests:ro
             - static:/usr/share/nginx/html:ro
@@ -33,6 +34,7 @@ services:
             - api
         ports:
             - 80:8080
+            - 443:8443
 
 volumes:
     static:

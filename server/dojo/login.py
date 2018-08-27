@@ -22,21 +22,24 @@ bp = Blueprint("login", __name__, url_prefix="/login")
 
 @bp.route("")
 def login():
-    url = url_for("login.authorized", _external=True)
+    scheme = current_app.config["PREFERRED_URL_SCHEME"]
+    url = url_for("login.authorized", _external=True, _scheme=scheme)
     return github.authorize(callback=url)
 
 
 @bp.route("/authorized")
 def authorized():
     response = github.authorized_response()
-    token = response.get("access_token")
+    token = response.get("access_token") if response else None
     if response is None or token is None:
+        error_proxy = response or request.args
         return "Access denied: reason=%s error=%s resp=%s" % (
-            response["error"],
-            response["error_description"],
-            response,
+            error_proxy["error"],
+            error_proxy["error_description"],
+            error_proxy,
         )
     session["github_token"] = (token, "")
+
     user_id = _update_user_data()
     jwt = create_access_token(user_id, fresh=True)
     data = {"token": jwt, "domain": current_app.config["WEB_UI_URL"]}

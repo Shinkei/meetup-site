@@ -54,6 +54,62 @@ bin/compose dev exec api flask db upgrade
 bin/compose live exec api flask db upgrade
 ```
 
+### ENVIRONMENT VARIABLES
+
+For the system to work as expected, some variables need to be set on
+each of the following files:
+- __live/.env__
+  - `CERTBOT_EMAIL`
+  - `DDCLIENT_WEB`
+  - `DDCLIENT_PROTOCOL`
+  - `DDCLIENT_SERVER`
+  - `DDCLIENT_LOGIN`
+  - `DDCLIENT_PASSWORD`
+  - `DDCLIENT_DOMAIN`
+  - `NGINX_HOST`
+- __server/.env.live__
+  - `GH_CONSUMER_KEY`
+  - `GH_CONSUMER_SECRET`
+  - `JWT_SECRET_KEY`
+  - `SQLALCHEMY_DATABASE_URI`
+  - `SERVER_NAME`
+  - `WEB_UI_URL`
+  - `PREFERRED_URL_SCHEME`
+- __server/.env.dev__
+  - `GH_CONSUMER_KEY`
+  - `GH_CONSUMER_SECRET`
+  - `JWT_SECRET_KEY`
+  - `SQLALCHEMY_DATABASE_URI`
+  - `SERVER_NAME`
+  - `WEB_UI_URL`
+  - `ENABLE_CORS`
+- __client/.env.live__
+  - `TITLE`
+  - `API_BASE_URL`
+- __client/.env.dev__
+  - `TITLE`
+  - `API_BASE_URL`
+
+#### Description
+- __API_BASE_URL__ should include protocol, and port if in dev environment
+- __CERTBOT_EMAIL__ email for account notifications
+- __DDCLIENT_DOMAIN__ domain to update
+- __DDCLIENT_LOGIN__ to login on provider's server
+- __DDCLIENT_PASSWORD__ to login on provider's server
+- __DDCLIENT_PROTOCOL__ is the provider's update protocol
+- __DDCLIENT_SERVER__ is the provider's server to update the record on
+- __DDCLIENT_WEB__ is the provider's IP checking page
+- __ENABLE_CORS__ set to '1' to enable on dev environment
+- __GH_CONSUMER_KEY__ OAuth key for github's API
+- __GH_CONSUMER_SECRET__ OAuth secret for github's API
+- __JWT_SECRET_KEY__ key to sign the JWT with
+- __NGINX_HOST__ domain name used to create certificates
+- __PREFERRED_URL_SCHEME__ set to 'https' on live env
+- __SERVER_NAME__ should be the name and port number of the server
+- __SQLALCHEMY_DATABASE_URI__ is the connection string to the database
+- __TITLE__ is the what will be displayed in the UI
+- __WEB_UI_URL__ is the full URL (including protocol) to access the UI
+
 ## Contributing
 
 ### Requesting features / Reporting bugs

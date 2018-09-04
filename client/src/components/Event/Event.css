@@ -1,0 +1,10 @@
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding: 5em 15em;
+}
+
+.input-field{
+  display: block;
+  clear: both;
+}

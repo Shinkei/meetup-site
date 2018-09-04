@@ -7,21 +7,27 @@ import {
   actions as loginActions,
   reducer as loginReducer,
   saga as loginSaga
-} from 'state-login'
+} from 'state/login'
 import {
   reducer as userReducer,
   saga as userSaga
-} from 'state-user'
+} from 'state/user'
+import {
+  reducer as eventReducer,
+  saga as eventSaga
+} from 'state/event'
 
 const reducer = combineReducers({
   login: loginReducer,
   user: userReducer,
+  event: eventReducer,
   form: formReducer
 })
 
 function * rootSaga () {
   yield all([
     loginSaga(),
+    eventSaga(),
     userSaga()
   ])
 }

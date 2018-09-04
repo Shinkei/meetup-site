@@ -11,6 +11,7 @@ services:
             - ./server/.env.dev
         environment:
             - FLASK_ENV=development
+            - ENABLE_CORS=1
         ports:
             - 8080:8080
     db:

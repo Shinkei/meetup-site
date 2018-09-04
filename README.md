@@ -99,12 +99,12 @@ each of the following files:
 - __DDCLIENT_PROTOCOL__ is the provider's update protocol
 - __DDCLIENT_SERVER__ is the provider's server to update the record on
 - __DDCLIENT_WEB__ is the provider's IP checking page
-- __ENABLE_CORS__ set to '1' to enable on dev environment
+- __ENABLE_CORS__ enable CORS headers
 - __GH_CONSUMER_KEY__ OAuth key for github's API
 - __GH_CONSUMER_SECRET__ OAuth secret for github's API
 - __JWT_SECRET_KEY__ key to sign the JWT with
 - __NGINX_HOST__ domain name used to create certificates
-- __PREFERRED_URL_SCHEME__ set to 'https' on live env
+- __PREFERRED_URL_SCHEME__ the default is http
 - __SERVER_NAME__ should be the name and port number of the server
 - __SQLALCHEMY_DATABASE_URI__ is the connection string to the database
 - __TITLE__ is the what will be displayed in the UI

@@ -17,11 +17,6 @@ services:
             - db
     db:
         container_name: dojo-db
-        image: postgres:10.4-alpine
-        environment:
-            - PGDATA=/var/lib/postgresql/data/pgdata
-        healthcheck:
-            test: ['CMD-SHELL', 'pg_isready -U postgres']
-            interval: 10s
-            timeout: 5s
-            retries: 5
+        build:
+            context: ./server
+            dockerfile: Dockerfile.postgis

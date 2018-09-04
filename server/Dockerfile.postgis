@@ -1,0 +1,39 @@
+FROM postgres:10.5-alpine
+
+RUN apk update && apk --no-cache add \
+    linux-headers=4.4.6-r2 \
+    make=4.2.1-r2 \
+    cmake=3.11.1-r2 \
+    g++=6.4.0-r8 \
+    perl=5.26.2-r1 \
+    libxml2-dev=2.9.8-r0 \
+    subversion=1.10.0-r0 \
+    wget=1.19.5-r0
+
+RUN cd /tmp && mkdir proj && \
+    wget https://download.osgeo.org/proj/proj-5.0.1.tar.gz -O proj.tar.gz && \
+    tar xzf proj.tar.gz -C proj --strip-components 1 && cd proj && \
+    ./configure && make && make install && \
+    cd /tmp && rm -r proj
+
+RUN cd /tmp && mkdir libgeos && \
+    wget https://download.osgeo.org/geos/geos-3.6.3.tar.bz2 -O libgeos.tar.bz2 && \
+    tar xjf libgeos.tar.bz2 -C libgeos --strip-components 1 && cd libgeos && \
+    ./configure && make && make install && \
+    cd /tmp && rm -r libgeos
+
+RUN cd /tmp && mkdir gdal && \
+    wget https://download.osgeo.org/gdal/2.3.1/gdal-2.3.1.tar.gz -O gdal.tar.gz && \
+    tar xzf gdal.tar.gz -C gdal --strip-components 1 && cd gdal && \
+    ./configure && make && make install && \
+    cd /tmp && rm -r gdal
+
+RUN cd /tmp && mkdir postgis && \
+    wget https://download.osgeo.org/postgis/source/postgis-2.4.4.tar.gz -O postgis.tar.gz && \
+    tar xzf postgis.tar.gz -C postgis --strip-components 1 && cd postgis && \
+    ./configure && make && make install && \
+    cd /tmp && rm -r postgis
+
+ENV PGDATA=/var/lib/postgresql/data/pgdata
+
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 CMD pg_isready -U postgres

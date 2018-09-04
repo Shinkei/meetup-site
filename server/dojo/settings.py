@@ -16,7 +16,7 @@ class Config(object):
         access_token_url="https://github.com/login/oauth/access_token",
         authorize_url="https://github.com/login/oauth/authorize",
     )
-    GH_ORG_ID = os.environ.get("GH_ORG_ID")
+    GH_ORG_ID = int(os.environ.get("GH_ORG_ID"))
     WEB_UI_URL = os.environ.get("WEB_UI_URL")
     JWT_IDENTITY_CLAIM = "sub"
     SQLALCHEMY_TRACK_MODIFICATIONS = False

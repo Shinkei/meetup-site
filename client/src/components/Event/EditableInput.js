@@ -1,35 +1,8 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { connect } from 'react-redux'
+import { Field, getFormValues } from 'redux-form'
 import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
-
-const EditableInput = (props) => {
-  return (
-    props.isEditionMode ? <EditionMode {...props} /> : <ViewMode {...props} />
-  )
-}
-
-const EditionMode = (props) => {
-  const stiles = {
-    display: "block"
-  }
-
-  return (
-    <div>
-      <Field className='input-field' name={props.titleProp} component={renderTextField} type='text' hintText={props.titleHint} />
-      <Field className='input-field' name={props.inputProp} component={renderTextField} multiLine hintText={props.inputHint} />
-    </div>
-  )
-}
-
-const ViewMode = (props) => {
-  return (
-    <div>
-      <h4>{props.titleContent}</h4>
-      <p>{props.inputContent}</p>
-    </div>
-  )
-}
 
 const renderTextField = ({
   input,
@@ -46,20 +19,105 @@ const renderTextField = ({
   />
 )
 
-EditableInput.propTypes = {
-  isEditionMode: PropTypes.bool.isRequired
+const ComboEdition = (props) => {
+  return (
+    <div>
+      <Field
+        className='input-field'
+        name={props.titleProp}
+        component={renderTextField}
+        hintText={props.titleHint}
+        type='text'
+      />
+      <Field
+        className='input-field'
+        name={props.contentProp}
+        component={renderTextField}
+        hintText={props.contentHint}
+        multiLine
+      />
+    </div>
+  )
 }
 
-EditionMode.propTypes = {
+ComboEdition.propTypes = {
   titleProp: PropTypes.string.isRequired,
-  inputProp: PropTypes.string.isRequired,
   titleHint: PropTypes.string.isRequired,
-  inputHint: PropTypes.string.isRequired
+  contentProp: PropTypes.string.isRequired,
+  contentHint: PropTypes.string.isRequired
 }
 
-ViewMode.propTypes = {
-  titleContent: PropTypes.string.isRequired,
-  inputContent: PropTypes.string.isRequired
+const ComboView = connect(state => ({
+  values: getFormValues('event-form')(state)
+}))(({titleProp, contentProp, values}) => {
+  return (
+    <div>
+      <h4>{values && values[titleProp]}</h4>
+      <p>{values && values[contentProp]}</p>
+    </div>
+  )
+})
+
+ComboView.propTypes = {
+  titleProp: PropTypes.string.isRequired,
+  contentProp: PropTypes.string.isRequired
 }
 
-export default EditableInput
+const HeaderEdition = (props) => {
+  return (
+    <Field
+      className='input-field'
+      name={props.contentProp}
+      component={renderTextField}
+      hintText={props.contentHint}
+      type='text'
+    />
+  )
+}
+
+HeaderEdition.propTypes = {
+  contentProp: PropTypes.string.isRequired,
+  contentHint: PropTypes.string.isRequired
+}
+
+const HeaderView = connect(state => ({
+  values: getFormValues('event-form')(state)
+}))(({contentProp, values}) => {
+  return (
+    <div>
+      <h2>{values && values[contentProp]}</h2>
+    </div>
+  )
+})
+
+HeaderView.propTypes = {
+  contentProp: PropTypes.string.isRequired
+}
+
+const component = {
+  combo: {
+    edition: ComboEdition,
+    view: ComboView
+  },
+  header: {
+    edition: HeaderEdition,
+    view: HeaderView
+  }
+}
+
+const EditableInput = (props) => {
+  const {type, showEditionMode} = props
+  const Element = component[type][showEditionMode ? 'edition' : 'view']
+  return (
+    <Element {...props} />
+  )
+}
+
+EditableInput.propTypes = {
+  type: PropTypes.oneOf(Object.keys(component)).isRequired,
+  showEditionMode: PropTypes.bool.isRequired
+}
+
+export default connect(state => ({
+  showEditionMode: state.event.showEditionMode
+}))(EditableInput)

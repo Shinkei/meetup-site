@@ -7,12 +7,13 @@ from flask_jwt_extended import create_access_token
 class TestQueries:
     @pytest.fixture
     def query_me(self):
-        return '{"query": "query CurrentUser { me { name, avatarUrl } }" }'
+        return '{"query": "query CurrentUser { me { name, avatarUrl, isAdmin } }" }'
 
     def test__query_me__authenticated__returns_user_data(
-        self, user, query_me, snapshot
+        self, user, query_me, make_admin, snapshot
     ):
-        token = create_access_token(user.id, fresh=True)
+        token = create_access_token(user._id, fresh=True)
+        make_admin(user)
         url = url_for("graphql")
         res = self.client.post(
             url,

@@ -9,7 +9,7 @@ snapshots = Snapshot()
 
 snapshots[
     "TestQueries.test__query_me__authenticated__returns_user_data 1"
-] = b'{"data":{"me":{"name":"Foo Bar","avatarUrl":"...img"}}}'
+] = b'{"data":{"me":{"name":"Foo Bar","avatarUrl":"...img","isAdmin":true}}}'
 
 snapshots[
     "TestQueries.test__query_me__not_authenticated__returns_errors 1"

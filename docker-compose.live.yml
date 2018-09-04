@@ -8,6 +8,8 @@ services:
             - static:/home/node/app/build:rw
         command: yarn build
     api:
+        environment:
+            - PREFERRED_URL_SCHEME=https
         env_file:
             - ./server/.env.live
         entrypoint: /init.sh

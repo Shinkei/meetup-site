@@ -1,4 +1,8 @@
-.container {
+.row-container {
+  padding: 1em 15em;
+}
+
+.grid-container {
   display: grid;
   grid-template-columns: 3fr 1fr;
   padding: 5em 15em;

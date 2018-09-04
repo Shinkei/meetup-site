@@ -18,10 +18,11 @@ snapshots["TestLogin.test__login_url__returns_oauth_redirection 1"] = {
 snapshots["TestLogin.test__login_url__returns_oauth_redirection 2"] = "302 FOUND"
 
 snapshots["TestLogin.test__authorized_url__returns_jwt 1"] = {
+    "_id": None,
     "avatar_url": "http://example.com/person.png",
     "email": "person@example.com",
+    "events": None,
     "handle": "person",
-    "id": None,
     "import_id": "103",
     "name": "John Doe",
     "orgs": None,
@@ -30,9 +31,9 @@ snapshots["TestLogin.test__authorized_url__returns_jwt 1"] = {
 
 snapshots["TestLogin.test__authorized_url__returns_jwt 2"] = [
     {
+        "_id": None,
         "avatar_url": "http://example.com/company.png",
         "handle": "example",
-        "id": None,
         "import_id": "123",
         "users": None,
     }

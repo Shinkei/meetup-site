@@ -1,4 +1,5 @@
 import {
+  LOGIN_ERROR,
   LOGIN_SUCCESS,
   FETCH_USER_ATTEMPT,
   FETCH_USER_ERROR,
@@ -43,7 +44,8 @@ export const fetchUser = () => {
     query CurrentUser {
       me {
         name,
-        avatarUrl
+        avatarUrl,
+        isAdmin
       }
     }
   `)
@@ -54,8 +56,10 @@ export function * loginHandler () {
   try {
     const res = yield call(fetchUser)
     if (res.data.errors) {
+      let type
       for (let error of res.data.errors) {
-        yield put({type: FETCH_USER_ERROR, error})
+        type = error.message === 'Authentication failed' ? LOGIN_ERROR : FETCH_USER_ERROR
+        yield put({type, error})
       }
       return
     }

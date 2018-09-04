@@ -54,7 +54,7 @@ def _get_github_oauth_token():
 
 @jwt.user_loader_callback_loader
 def _load_user_from_token(user_id):
-    return User.query.filter_by(id=user_id).one_or_none()
+    return User.query.filter_by(_id=user_id).one_or_none()
 
 
 def _update_user_data():
@@ -66,7 +66,7 @@ def _update_user_data():
     user = _update_or_create_user(user_data, orgs)
     db.session.add(user)
     db.session.commit()
-    return user.id
+    return user._id
 
 
 def _update_or_create_org(data):

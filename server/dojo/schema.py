@@ -5,17 +5,23 @@ from flask import request
 from flask_graphql import GraphQLView
 from flask_jwt_extended import verify_fresh_jwt_in_request, get_current_user
 from graphene import relay
+from graphql import GraphQLError
 
-from .queries import UserQuery
+from .queries import UserQuery, EventQuery
+from .mutations import EventMutation
 
 logger = logging.getLogger(__name__)
 
 
-class Query(UserQuery):
+class Query(UserQuery, EventQuery, graphene.ObjectType):
     node = relay.Node.Field()
 
 
-schema = graphene.Schema(query=Query)
+class Mutation(EventMutation, graphene.ObjectType):
+    pass
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
 
 
 class EnhancedView(GraphQLView):
@@ -30,12 +36,13 @@ class EnhancedView(GraphQLView):
 
 
 class AuthorizationMiddleware(object):
-    auth_required = ["node", "me", "all_users"]
+    auth_not_required = set(["nextEvent"])  # fields that don't require authentication
 
-    def resolve(self, next, root, info, **args):
-        if info.field_name in self.auth_required:
-            assert info.context.get("user"), "Authentication failed"
-        return next(root, info, **args)
+    def resolve(self, next, root, info, **kwargs):
+        if info.field_name not in self.auth_not_required:
+            if not info.context.get("user"):
+                raise GraphQLError("Authentication failed")
+        return next(root, info, **kwargs)
 
 
 def init_app(app):

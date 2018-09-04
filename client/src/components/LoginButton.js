@@ -2,7 +2,7 @@ import FlatButton from 'material-ui/FlatButton'
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { actions } from 'state-login'
+import { actions } from 'state/login'
 
 const LoginButton = ({isUserAuthenticated, attemptLogin}) => (
   isUserAuthenticated ? 'YES'

@@ -1,4 +1,4 @@
-"""empty message
+"""initial users and orgs
 
 Revision ID: 8bfb5e2e01a9
 Revises: 
@@ -28,13 +28,13 @@ def upgrade():
             server_default=sa.text("uuid_generate_v4()"),
             nullable=False,
         ),
-        sa.Column("import_id", sa.Integer(), nullable=True),
+        sa.Column("import_id", sa.Integer(), nullable=False),
         sa.Column("avatar_url", sa.String(), nullable=True),
         sa.Column("handle", sa.String(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_index(
-        op.f("ix_organizations_import_id"), "organizations", ["import_id"], unique=False
+        op.f("ix_organizations_import_id"), "organizations", ["import_id"], unique=True
     )
     # Users
     op.create_table(
@@ -45,7 +45,7 @@ def upgrade():
             server_default=sa.text("uuid_generate_v4()"),
             nullable=False,
         ),
-        sa.Column("import_id", sa.Integer(), nullable=True),
+        sa.Column("import_id", sa.Integer(), nullable=False),
         sa.Column("avatar_url", sa.String(), nullable=True),
         sa.Column("profile_url", sa.String(), nullable=True),
         sa.Column("handle", sa.String(), nullable=True),
@@ -53,7 +53,7 @@ def upgrade():
         sa.Column("email", sa.String(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(op.f("ix_users_import_id"), "users", ["import_id"], unique=False)
+    op.create_index(op.f("ix_users_import_id"), "users", ["import_id"], unique=True)
     # Organizations <-> Users
     op.create_table(
         "user_organization_mappings",

@@ -56,6 +56,6 @@ class TestLogin:
         res = self.client.get(url)
         assert res.data.find(b"TOKEN") != -1
         user = User.query.filter_by(import_id=103).one()
-        snapshot.assert_match(dict(user, id=None, orgs=None))
-        orgs = [dict(org, id=None, users=None) for org in user.orgs]
+        snapshot.assert_match(dict(user, _id=None, orgs=None, events=None))
+        orgs = [dict(org, _id=None, users=None) for org in user.orgs]
         snapshot.assert_match(orgs)

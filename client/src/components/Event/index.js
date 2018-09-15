@@ -58,7 +58,7 @@ class Event extends React.Component {
             contentProp='requirementContent'
             contentHint='requirements for the event'
           />
-          <div class='last-column'>
+          <div className='last-column'>
             {isAdmin && <Toggle toggled={showEditionMode} onToggle={toggleView} />}
             {showEditionMode &&
             <div>

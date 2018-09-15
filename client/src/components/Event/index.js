@@ -23,40 +23,42 @@ class Event extends React.Component {
     const { pristine, reset, submitting, toggleView, isAdmin, showEditionMode } = this.props
     return (
       <Form onSubmit={this.handleSubmit}>
-        <div className='row-container'>
+        <div className='grid-container'>
+          <div className='first-column' />
           <EditableInput type='header'
+            className='middle-column'
             contentProp='titleContent'
             contentHint='name of the event'
           />
-        </div>
-        <div className='grid-container'>
-          <div>
-            <EditableInput type='combo'
-              titleProp='descriptionTitle'
-              titleHint='header for event description'
-              contentProp='desccriptionContent'
-              contentHint='description of the event'
-            />
-            <EditableInput type='combo'
-              titleProp='agendaTitle'
-              titleHint='header for event agenda'
-              contentProp='agendaContent'
-              contentHint='agenda of the event'
-            />
-            <EditableInput type='combo'
-              titleProp='presenterTitle'
-              titleHint='header for event presenters'
-              contentProp='presenter_content'
-              contentHint='presenters of the event'
-            />
-            <EditableInput type='combo'
-              titleProp='requirementTitle'
-              titleHint='header for event requirements'
-              contentProp='requirementContent'
-              contentHint='requirements for the event'
-            />
-          </div>
-          <div>
+          <EditableInput type='combo'
+            className='middle-column'
+            titleProp='descriptionTitle'
+            titleHint='header for event description'
+            contentProp='desccriptionContent'
+            contentHint='description of the event'
+          />
+          <EditableInput type='combo'
+            className='middle-column'
+            titleProp='agendaTitle'
+            titleHint='header for event agenda'
+            contentProp='agendaContent'
+            contentHint='agenda of the event'
+          />
+          <EditableInput type='combo'
+            className='middle-column'
+            titleProp='presenterTitle'
+            titleHint='header for event presenters'
+            contentProp='presenter_content'
+            contentHint='presenters of the event'
+          />
+          <EditableInput type='combo'
+            className='middle-column'
+            titleProp='requirementTitle'
+            titleHint='header for event requirements'
+            contentProp='requirementContent'
+            contentHint='requirements for the event'
+          />
+          <div class='last-column'>
             {isAdmin && <Toggle toggled={showEditionMode} onToggle={toggleView} />}
             {showEditionMode &&
             <div>

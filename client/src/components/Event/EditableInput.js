@@ -21,7 +21,7 @@ const renderTextField = ({
 
 const ComboEdition = (props) => {
   return (
-    <div>
+    <div className={props.className}>
       <Field
         className='input-field'
         name={props.titleProp}
@@ -49,9 +49,9 @@ ComboEdition.propTypes = {
 
 const ComboView = connect(state => ({
   values: getFormValues('event-form')(state)
-}))(({titleProp, contentProp, values}) => {
+}))(({titleProp, contentProp, values, className}) => {
   return (
-    <div>
+    <div className={className}>
       <h4>{values && values[titleProp]}</h4>
       <p>{values && values[contentProp]}</p>
     </div>
@@ -65,13 +65,15 @@ ComboView.propTypes = {
 
 const HeaderEdition = (props) => {
   return (
-    <Field
-      className='input-field'
-      name={props.contentProp}
-      component={renderTextField}
-      hintText={props.contentHint}
-      type='text'
-    />
+    <div className={props.className}>
+      <Field
+        className='input-field'
+        name={props.contentProp}
+        component={renderTextField}
+        hintText={props.contentHint}
+        type='text'
+      />
+    </div>
   )
 }
 
@@ -82,9 +84,9 @@ HeaderEdition.propTypes = {
 
 const HeaderView = connect(state => ({
   values: getFormValues('event-form')(state)
-}))(({contentProp, values}) => {
+}))(({contentProp, values, className}) => {
   return (
-    <div>
+    <div className={className}>
       <h2>{values && values[contentProp]}</h2>
     </div>
   )

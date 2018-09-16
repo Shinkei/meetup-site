@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from geoalchemy2.elements import WKTElement
 from geoalchemy2.functions import ST_AsGeoJSON
 from geoalchemy2.types import Geometry
+from osgeo import ogr
 from sqlalchemy import inspect
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
@@ -93,11 +94,13 @@ class Event(db.Model, Base):
 
     @hybrid_property
     def location(self):
-        json_str = db.session.query(ST_AsGeoJSON(self._location)).scalar()
-        if not json_str:
-            return []
-        data = json.loads(json_str)
-        return data["coordinates"]
+        #json_str = db.session.query(ST_AsGeoJSON(self._location)).scalar()
+        #if not json_str:
+        #    return []
+        #data = json.loads(json_str)
+        #return data["coordinates"]
+        point = ogr.CreateGeometryFromWkb(self._location)
+        return [point.GetX(), point.GetY()]
 
     @location.setter
     def location(self, pair):
